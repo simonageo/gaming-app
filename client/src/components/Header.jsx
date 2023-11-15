@@ -18,11 +18,11 @@ export default function Header() {
                 <Link to="/" >Home</Link>
                 </li>
                 <li>
-                  <Link to="shop.html">Our Shop</Link>
+                  <Link to="/games">Games</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="product-details.html">Product Details</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/contact">Contact Us</Link>
                 </li>
