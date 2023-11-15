@@ -27,7 +27,7 @@ export default function Header() {
                   <Link to="/contact">Contact Us</Link>
                 </li>
                 <li>
-                  <Link to="#">Sign In</Link>
+                  <Link to="/login">Log In</Link>
                 </li>
               </ul>
               <Link className="menu-trigger">
