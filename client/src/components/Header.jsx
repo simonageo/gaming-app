@@ -29,6 +29,9 @@ export default function Header() {
                 <li>
                   <Link to="/login">Log In</Link>
                 </li>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
               </ul>
               <Link className="menu-trigger">
                 <span>Menu</span>
