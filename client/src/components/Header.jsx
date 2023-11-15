@@ -27,15 +27,15 @@ export default function Header() {
                   <Link to="/contact">Contact Us</Link>
                 </li>
                 <li>
-                  <Link to="/login">Log In</Link>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>
                   <Link to="/register">Register</Link>
                 </li>
               </ul>
-              <Link className="menu-trigger">
+              {/* <Link className="menu-trigger">
                 <span>Menu</span>
-              </Link>
+              </Link> */}
               {/* ***** Menu End ***** */}
             </nav>
           </div>
