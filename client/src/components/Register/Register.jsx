@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
 import styles from "../Register/Register.module.css";
+import AuthContext from "../AuthContext";
+import useForm from "../../hooks/useForm";
+import { useContext } from "react";
 
 export default function Register(){
+  const { register } = useContext(AuthContext);
+  const { values, onChange, onSubmit } = useForm(register, {
+    email: "",
+    password: "",
+    rePassword: ""
+  });
     return (
         <div className="container">
       <div className="row justify-content-center">
@@ -13,7 +22,7 @@ export default function Register(){
             </span>
           </div>
 
-          <form id="register-form" action="#" method="post">
+          <form id="register-form" onSubmit={onSubmit}>
 
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
@@ -27,6 +36,8 @@ export default function Register(){
                   placeholder="Your Email..."
                   autoComplete="on"
                   required=""
+                  value={values.email}
+                  onChange={onChange}
                   className={styles.inputField}
                 />
               </fieldset>
@@ -44,6 +55,8 @@ export default function Register(){
                   placeholder="Your Password..."
                   autoComplete="on"
                   required=""
+                  value={values.password}
+                  onChange={onChange}
                   className={styles.inputField}
                 />
               </fieldset>
@@ -61,6 +74,8 @@ export default function Register(){
                   placeholder="Repeat Your Password..."
                   autoComplete="on"
                   required=""
+                  value={values.rePassword}
+                  onChange={onChange}
                   className={styles.inputField}
                 />
               </fieldset>

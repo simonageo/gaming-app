@@ -15,9 +15,15 @@ export const AuthProvider = ({ children }) => {
     setAuthenticated(true);
     navigate("/");
   };
+  const register = async (values) => {
+    const result=await authService.register(values.email, values.password);
+    localStorage.setItem("accessToken", result.accessToken);
+    setAuthenticated(true);
+    navigate("/");
+  }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, register }}>
       {children}
     </AuthContext.Provider>
   );
