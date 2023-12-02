@@ -9,6 +9,7 @@ import Register from "./components/Register/Register";
 import { AuthProvider } from "./AuthContext";
 import Logout from "./components/Logout";
 import AuthGuard from "./AuthGuard";
+import AddGame from "./components/Games/AddGame/AddGame.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route element={<AuthGuard/>}>
+            <Route path="/game/create" element={<AddGame />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
         </Routes>
