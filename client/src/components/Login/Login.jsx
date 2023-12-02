@@ -62,7 +62,7 @@ export default function Login() {
                 <div className="register-link">
                   <p>
                     If you do not have an account,{" "}
-                    <Link href="/register">register here</Link>.
+                    <Link to="/register">register here</Link>.
                   </p>
                 </div>
               </fieldset>

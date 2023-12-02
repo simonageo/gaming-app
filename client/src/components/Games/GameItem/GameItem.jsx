@@ -1,20 +1,23 @@
+import { Link } from "react-router-dom";
 import styles from "./GameItemStyle.module.css";
 
-export default function GameItem({ imageUrl, title, category }) {
+export default function GameItem({ imageUrl, title, category, _id }) {
   return (
     <div
       className={`${styles.item} col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv`}
     >
       <div className="item">
         <div className={styles.thumb}>
-          <a href="product-details.html">
+          <Link to={`/games/${_id}`}>
             <img src={imageUrl} alt="" />
-          </a>
+          </Link>
         </div>
         <div className={styles["down-content"]}>
           <span className={styles.category}>{category}</span>
           <h4 className={styles.h4}>{title}</h4>
-          <a className={styles.detailsButton} href="product-details.html">Details</a>
+          <Link className={styles.detailsButton} to={`/games/${_id}`} >
+            Details
+          </Link>
         </div>
       </div>
     </div>

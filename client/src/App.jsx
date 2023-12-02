@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import ContactUs from "./components/Contact";
-import Games from "./components/Games/Games";
+import Games from "./components/Games/AllGames";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 

@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import * as gameService from '../../services/gameService';
-import GameItem from "./GameItem";
+import * as gameService from "../../services/gameService";
+import GameItem from "./GameItem/GameItem";
 
 export default function Games() {
-  const [games, setGames]=useState([]);
+  const [games, setGames] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     gameService
-    .getAll()
-    .then((result)=>setGames(result))
-    .catch(err=>console.log(err))
-  }, [])
+      .getAll()
+      .then((result) => setGames(result))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <>
       <div className="page-heading header-text">
@@ -51,8 +51,8 @@ export default function Games() {
             </li>
           </ul>
           <div className="row trending-box">
-            {games.map((game)=>(
-              <GameItem key={game._id} {...game}/>
+            {games.map((game) => (
+              <GameItem key={game._id} {...game} />
             ))}
           </div>
           <div className="row">

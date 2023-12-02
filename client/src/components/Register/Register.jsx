@@ -96,7 +96,7 @@ export default function Register(){
                 <div className="login-link">
                   <p>
                     If you already have an account,{" "}
-                    <Link href="/login">login here</Link>.
+                    <Link to="/login">login here</Link>.
                   </p>
                 </div>
               </fieldset>
