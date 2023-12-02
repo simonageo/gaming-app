@@ -16,14 +16,20 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
   const register = async (values) => {
-    const result=await authService.register(values.email, values.password);
+    const result = await authService.register(values.email, values.password);
     localStorage.setItem("accessToken", result.accessToken);
     setAuthenticated(true);
     navigate("/");
+  };
+  const logout = async () => {
+    await authService.logout();
+    setAuthenticated(false);
+    localStorage.removeItem('accessToken');
+    navigate('/');
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

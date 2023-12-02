@@ -16,7 +16,7 @@ export const login = async (email, password) => {
   if (!response.ok) {
     throw result;
   }
-  
+
   return result;
 };
 
@@ -36,6 +36,21 @@ export const register = async (email, password) => {
   if (!response.ok) {
     throw result;
   }
-  
+
   return result;
-}
+};
+
+export const logout = async () => {
+  const response = await fetch(`${baseUrl}/logout`, {
+    method: "GET",
+    headers: {
+      "X-Authorization": localStorage.getItem("accessToken"),
+    },
+  });
+  if (response.status === 204) {
+    return {};
+  }
+  if (!response.ok) {
+    throw result;
+  }
+};
