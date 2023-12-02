@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
 export default function Header() {
+  let isAuthenticated = false;
+  if (localStorage.accessToken) {
+    isAuthenticated = true;
+  }
   return (
     <header className="header-area header-sticky">
       <div className="container">
@@ -15,7 +19,7 @@ export default function Header() {
               {/* ***** Menu Start ***** */}
               <ul className="nav">
                 <li>
-                <Link to="/" >Home</Link>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
                   <Link to="/games">Games</Link>
@@ -26,12 +30,26 @@ export default function Header() {
                 <li>
                   <Link to="/contact">Contact Us</Link>
                 </li>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
+                {isAuthenticated && (
+                  <>
+                    <li>
+                      <Link to="/game/create">Create Game</Link>
+                    </li>
+                    <li>
+                      <Link to="/logout">Logout</Link>
+                    </li>
+                  </>
+                )}
+                {!isAuthenticated && (
+                  <>
+                    <li>
+                      <Link to="/login">Login</Link>
+                    </li>
+                    <li>
+                      <Link to="/register">Register</Link>
+                    </li>
+                  </>
+                )}
               </ul>
               {/* <Link className="menu-trigger">
                 <span>Menu</span>

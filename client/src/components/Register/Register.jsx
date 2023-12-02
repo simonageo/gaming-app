@@ -14,22 +14,6 @@ export default function Register(){
           </div>
 
           <form id="register-form" action="#" method="post">
-            <div className="col-lg-12">
-              <fieldset className={styles.inputFieldContainer}>
-                <label htmlFor="username" className={styles.labelAbove}>
-                  Username:
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  placeholder="Your Username..."
-                  autoComplete="on"
-                  required=""
-                  className={styles.inputField}
-                />
-              </fieldset>
-            </div>
 
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>

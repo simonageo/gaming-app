@@ -1,7 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../Login/Login.module.css";
+import useForm from "../../hooks/useForm";
+import * as authServices from '../../services/authService';
 
 export default function Login() {
+  const navigate=useNavigate();
+  const loginSubmit = async (values) => {
+    const result=await authServices.login(values.email, values.password);
+    localStorage.setItem("accessToken", result.accessToken);
+    navigate('/');
+  }
+  const {values, onChange, onSubmit}=useForm(loginSubmit, {
+    email: '',
+    password: ''
+  });
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -13,19 +26,21 @@ export default function Login() {
             </span>
           </div>
 
-          <form id="login-form" action="#" method="post">
+          <form id="login-form" onSubmit={onSubmit}>
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
-                <label htmlFor="username" className={styles.labelAbove}>
-                  Username:
+                <label htmlFor="email" className={styles.labelAbove}>
+                  Email:
                 </label>
                 <input
                   type="text"
-                  name="username"
-                  id="username"
-                  placeholder="Your Username..."
+                  name="email"
+                  id="email"
+                  placeholder="Your Email..."
                   autoComplete="on"
                   required=""
+                  value={values.email}
+                  onChange={onChange}
                   className={styles.inputField}
                 />
               </fieldset>
@@ -43,6 +58,8 @@ export default function Login() {
                   placeholder="Your Password..."
                   autoComplete="on"
                   required=""
+                  value={values.password}
+                  onChange={onChange}
                   className={styles.inputField}
                 />
               </fieldset>
