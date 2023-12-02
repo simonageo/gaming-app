@@ -1,22 +1,18 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "./AuthContext";
 
 export default function Header() {
-  let isAuthenticated = false;
-  if (localStorage.accessToken) {
-    isAuthenticated = true;
-  }
+  const {isAuthenticated}=useContext(AuthContext)
   return (
     <header className="header-area header-sticky">
       <div className="container">
         <div className="row">
           <div className="col-12">
             <nav className="main-nav">
-              {/* ***** Logo Start ***** */}
               <Link to="/" className="logo">
                 <img src="images/logo.png" style={{ width: 158 }} />
               </Link>
-              {/* ***** Logo End ***** */}
-              {/* ***** Menu Start ***** */}
               <ul className="nav">
                 <li>
                   <Link to="/">Home</Link>
@@ -24,9 +20,6 @@ export default function Header() {
                 <li>
                   <Link to="/games">Games</Link>
                 </li>
-                {/* <li>
-                  <Link to="product-details.html">Product Details</Link>
-                </li> */}
                 <li>
                   <Link to="/contact">Contact Us</Link>
                 </li>
@@ -36,25 +29,21 @@ export default function Header() {
                       <Link to="/game/create">Create Game</Link>
                     </li>
                     <li>
-                      <Link to="/logout">Logout</Link>
+                      <Link to="/logout" className="user">Logout</Link>
                     </li>
                   </>
                 )}
                 {!isAuthenticated && (
                   <>
                     <li>
-                      <Link to="/login">Login</Link>
+                      <Link to="/login" className="user">Login</Link>
                     </li>
                     <li>
-                      <Link to="/register">Register</Link>
+                      <Link to="/register" className="user">Register</Link>
                     </li>
                   </>
                 )}
               </ul>
-              {/* <Link className="menu-trigger">
-                <span>Menu</span>
-              </Link> */}
-              {/* ***** Menu End ***** */}
             </nav>
           </div>
         </div>

@@ -1,18 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import styles from "../Login/Login.module.css";
 import useForm from "../../hooks/useForm";
-import * as authServices from '../../services/authService';
+import { useContext } from "react";
+import AuthContext from "../AuthContext";
 
 export default function Login() {
-  const navigate=useNavigate();
-  const loginSubmit = async (values) => {
-    const result=await authServices.login(values.email, values.password);
-    localStorage.setItem("accessToken", result.accessToken);
-    navigate('/');
-  }
-  const {values, onChange, onSubmit}=useForm(loginSubmit, {
-    email: '',
-    password: ''
+  const { login } = useContext(AuthContext);
+  const { values, onChange, onSubmit } = useForm(login, {
+    email: "",
+    password: "",
   });
 
   return (
