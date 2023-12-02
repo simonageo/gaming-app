@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import styles from "../Register/Register.module.css";
-import AuthContext from "../AuthContext";
+import AuthContext from "../../AuthContext";
 import useForm from "../../hooks/useForm";
 import { useContext } from "react";
 
-export default function Register(){
+export default function Register() {
   const { register } = useContext(AuthContext);
   const { values, onChange, onSubmit } = useForm(register, {
     email: "",
     password: "",
-    rePassword: ""
+    rePassword: "",
   });
-    return (
-        <div className="container">
+  return (
+    <div className="container">
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div className="page-heading header-text">
@@ -23,7 +23,6 @@ export default function Register(){
           </div>
 
           <form id="register-form" onSubmit={onSubmit}>
-
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
                 <label htmlFor="email" className={styles.labelAbove}>
@@ -104,5 +103,5 @@ export default function Register(){
         </div>
       </div>
     </div>
-    )
+  );
 }

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import * as authService from "../services/authService";
+import * as authService from "./services/authService";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -24,9 +24,9 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await authService.logout();
     setAuthenticated(false);
-    localStorage.removeItem('accessToken');
-    navigate('/');
-  }
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>

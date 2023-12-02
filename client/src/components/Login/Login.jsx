@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "../Login/Login.module.css";
 import useForm from "../../hooks/useForm";
 import { useContext } from "react";
-import AuthContext from "../AuthContext";
+import AuthContext from "../../AuthContext";
 
 export default function Login() {
   const { login } = useContext(AuthContext);

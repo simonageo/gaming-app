@@ -6,8 +6,9 @@ import ContactUs from "./components/Contact";
 import Games from "./components/Games/AllGames";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-import { AuthProvider } from "./components/AuthContext";
+import { AuthProvider } from "./AuthContext";
 import Logout from "./components/Logout";
+import AuthGuard from "./AuthGuard";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route element={<AuthGuard/>}>
+            <Route path="/logout" element={<Logout />} />
+          </Route>
         </Routes>
         <Footer />
       </AuthProvider>
