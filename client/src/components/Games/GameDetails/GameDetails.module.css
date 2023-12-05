@@ -19,6 +19,12 @@
   border: transparent;
   letter-spacing: 0.25px;
 }
+
 .button + .button {
+  margin-top: 10px;
   margin-left: 5px;
+}
+
+.boldText {
+  font-weight: bold;
 }
