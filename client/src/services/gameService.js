@@ -45,3 +45,19 @@ export const edit = async (gameId, data) => {
   }
   return result;
 }
+
+export const del = async (gameId) => {
+  const token = localStorage.getItem("accessToken");
+  const response = await fetch(`${baseUrl}/${gameId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      "X-Authorization": token,
+    },
+  });
+  // const result = await response.json();
+  // if (!response.ok) {
+  //   throw result;
+  // }
+  // return result;
+}

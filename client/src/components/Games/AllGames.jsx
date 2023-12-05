@@ -50,33 +50,10 @@ export default function Games() {
               </a>
             </li>
           </ul>
-          <div className="row trending-box">
+          <div className='row trending-box'>
             {games.map((game) => (
               <GameItem key={game._id} {...game} />
             ))}
-          </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <ul className="pagination">
-                <li>
-                  <a href="#"> &lt; </a>
-                </li>
-                <li>
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a className="is_active" href="#">
-                    2
-                  </a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#"> &gt; </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>

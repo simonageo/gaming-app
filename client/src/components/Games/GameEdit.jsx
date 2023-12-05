@@ -1,42 +1,42 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import styles from '../Games/AddGame/AddGame.module.css'
+import styles from "../Games/AddGame/AddGame.module.css";
 import { useEffect, useState } from "react";
 import { getOne } from "../../services/gameService.js";
 import { edit } from "../../services/gameService";
 
 export default function GameEdit() {
-    const navigate = useNavigate();
-    const {gameId}=useParams();
-    const [game, setGame]=useState({
-        title: '',
-        category: '',
-        difficultyLevel: '',
-        imageUrl: '',
-        description: ''
-    });
+  const navigate = useNavigate();
+  const { gameId } = useParams();
+  const [game, setGame] = useState({
+    title: "",
+    category: "",
+    difficultyLevel: "",
+    imageUrl: "",
+    description: "",
+  });
 
-    useEffect(()=>{
-        getOne(gameId)
-        .then(setGame)
-        .catch(err=>console.log(err))
-    }, [gameId]);
-    
-    const editGameSubmit = async (e)=>{
-        e.preventDefault();
-        const data=Object.fromEntries(new FormData(e.currentTarget));
-        try {
-            await edit(gameId, data);
-            navigate('/games')
-        } catch(err){
-            console.log(err)
-        }
-    };
-    const onChange=(e)=>{
-        setGame(state => ({
-            ...state,
-            [e.target.name]: e.target.value
-        }));
+  useEffect(() => {
+    getOne(gameId)
+      .then(setGame)
+      .catch((err) => console.log(err));
+  }, [gameId]);
+
+  const editGameSubmit = async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+    try {
+      await edit(gameId, data);
+      navigate("/games");
+    } catch (err) {
+      console.log(err);
     }
+  };
+  const onChange = (e) => {
+    setGame((state) => ({
+      ...state,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <div className="container">
       <div className="row justify-content-center">

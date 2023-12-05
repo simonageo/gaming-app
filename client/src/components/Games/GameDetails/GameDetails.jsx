@@ -1,10 +1,12 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getOne } from "../../../services/gameService.js";
 import { useContext, useEffect, useState } from "react";
 import styles from "./GameDetails.module.css";
 import AuthContext from "../../../AuthContext";
+import { del } from "../../../services/gameService";
 
 export default function GameDetails() {
+  const navigate = useNavigate();
   const { gameId } = useParams();
   const [game, setGame] = useState({});
   useEffect(() => {
@@ -14,6 +16,15 @@ export default function GameDetails() {
   }, [gameId]);
 
   const { userId } = useContext(AuthContext);
+
+  const deleteHandler = async () => {
+    try {
+      await del(gameId);
+      navigate("/games");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -57,7 +68,11 @@ export default function GameDetails() {
                           >
                             Edit
                           </Link>
-                          <button id="delete" className={styles.button}>
+                          <button
+                            id="delete"
+                            className={styles.button}
+                            onClick={deleteHandler}
+                          >
                             Delete
                           </button>
                         </fieldset>

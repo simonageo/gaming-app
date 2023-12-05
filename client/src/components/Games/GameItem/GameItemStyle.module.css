@@ -56,3 +56,6 @@
   .trending .item:hover .down-content a {
     background-color: #0071f8;
   }
+  .item {
+    flex: 0.5;
+  }
