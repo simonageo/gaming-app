@@ -11,6 +11,7 @@ import Logout from "./components/Logout";
 import AuthGuard from "./AuthGuard";
 import AddGame from "./components/Games/AddGame/AddGame";
 import GameDetails from "./components/Games/GameDetails/GameDetails";
+import GameEdit from "./components/Games/GameEdit";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route element={<AuthGuard />}>
             <Route path="/game/create" element={<AddGame />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/games/:gameId/edit" element={<GameEdit />} />
           </Route>
         </Routes>
         <Footer />

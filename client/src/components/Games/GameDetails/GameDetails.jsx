@@ -1,7 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { getOne } from "../../../services/gameService.js";
-import { useEffect, useState } from "react";
-import styles from './GameDetails.module.css'
+import { useContext, useEffect, useState } from "react";
+import styles from "./GameDetails.module.css";
+import AuthContext from "../../../AuthContext";
 
 export default function GameDetails() {
   const { gameId } = useParams();
@@ -11,6 +12,8 @@ export default function GameDetails() {
       .then(setGame)
       .catch((err) => console.log(err));
   }, [gameId]);
+
+  const { userId } = useContext(AuthContext);
 
   return (
     <>
@@ -43,18 +46,24 @@ export default function GameDetails() {
                     <p>Difficulty Level: {game.difficultyLevel}</p>
                     <p>Description: {game.description}</p>
                   </div>
-                  <div className="col-lg-12">
+                  {userId === game._ownerId && (
                     <div className="col-lg-12">
-                      <fieldset>
-                        <button id="edit" className={styles.button}>
-                          Edit
-                        </button>
-                        <button id="delete" className={styles.button}>
-                          Delete
-                        </button>
-                      </fieldset>
+                      <div className="col-lg-12">
+                        <fieldset>
+                          <Link
+                            to={`/games/${gameId}/edit`}
+                            id="edit"
+                            className={styles.button}
+                          >
+                            Edit
+                          </Link>
+                          <button id="delete" className={styles.button}>
+                            Delete
+                          </button>
+                        </fieldset>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

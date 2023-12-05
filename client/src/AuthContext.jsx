@@ -9,27 +9,50 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setAuthenticated] = useState(
     !!localStorage.accessToken
   );
+  const [userId, setUserId] = useState("");
+
   const login = async (values) => {
-    const result = await authService.login(values.email, values.password);
-    localStorage.setItem("accessToken", result.accessToken);
-    setAuthenticated(true);
-    navigate("/");
+    try {
+      const result = await authService.login(values.email, values.password);
+      localStorage.setItem("accessToken", result.accessToken);
+      setAuthenticated(true);
+      setUserId(result._id);
+      navigate("/");
+    } catch (err) {
+      setUserId("");
+      navigate("/");
+    }
   };
+
   const register = async (values) => {
-    const result = await authService.register(values.email, values.password);
-    localStorage.setItem("accessToken", result.accessToken);
-    setAuthenticated(true);
-    navigate("/");
+    try {
+      const result = await authService.register(values.email, values.password);
+      localStorage.setItem("accessToken", result.accessToken);
+      setAuthenticated(true);
+      setUserId(result._id);
+      navigate("/");
+    } catch (err) {
+      setUserId("");
+      navigate("/");
+    }
   };
+
   const logout = async () => {
-    await authService.logout();
-    setAuthenticated(false);
-    localStorage.removeItem("accessToken");
-    navigate("/");
+    try {
+      await authService.logout();
+      setAuthenticated(false);
+      localStorage.removeItem("accessToken");
+      setUserId("");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, login, register, logout, userId: userId }}
+    >
       {children}
     </AuthContext.Provider>
   );
