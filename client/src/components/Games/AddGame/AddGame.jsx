@@ -1,7 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../AddGame/AddGame.module.css";
+import {createGame} from "../../../services/gameService";
 
 export default function AddGame() {
+  const navigate=useNavigate();
+  const createGameHandler=async(e)=>{
+    e.preventDefault();
+    const data=Object.fromEntries(new FormData(e.currentTarget));
+    try{
+      await createGame(data);
+      navigate('/games')
+    } catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -13,17 +26,17 @@ export default function AddGame() {
             </span>
           </div>
 
-          <form id="login-form">
+          <form id="create-game-form" onSubmit={createGameHandler}>
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
-                <label htmlFor="name" className={styles.labelAbove}>
-                  Name:
+                <label htmlFor="title" className={styles.labelAbove}>
+                  Title:
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Name..."
+                  name="title"
+                  id="title"
+                  placeholder="Title..."
                   autoComplete="on"
                   required=""
                   className={styles.inputField}
@@ -36,16 +49,13 @@ export default function AddGame() {
                 <label htmlFor="category" className={styles.labelAbove}>
                   Category:
                 </label>
-                <select
+                <input
+                  type="text"
                   name="category"
                   id="category"
+                  placeholder="Category..."
                   className={styles.inputField}
-                >
-                  <option value="adventure">Adventure</option>
-                  <option value="strategy">Strategy</option>
-                  <option value="racing">Racing</option>
-                  {/* Add more options as needed */}
-                </select>
+                />
               </fieldset>
             </div>
 
@@ -85,8 +95,7 @@ export default function AddGame() {
                 <label htmlFor="description" className={styles.labelAbove}>
                   Description:
                 </label>
-                <input
-                  type="text"
+                <textarea
                   name="description"
                   id="description"
                   placeholder="Description..."
