@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from '../AddGame/AddGame.module.css'
+import styles from "../AddGame/AddGame.module.css";
 
 export default function AddGame() {
   return (
@@ -13,7 +13,7 @@ export default function AddGame() {
             </span>
           </div>
 
-          <form id="login-form" >
+          <form id="login-form">
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
                 <label htmlFor="name" className={styles.labelAbove}>

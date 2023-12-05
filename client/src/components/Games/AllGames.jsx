@@ -20,7 +20,7 @@ export default function Games() {
             <div className="col-lg-12">
               <h3>Games</h3>
               <span className="breadcrumb">
-                <Link href="/">Home</Link> &gt; Games
+                <Link to="/">Home</Link> &gt; Games
               </span>
             </div>
           </div>

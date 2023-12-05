@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../AuthContext";
 
 export default function Header() {
-  const {isAuthenticated}=useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <header className="header-area header-sticky">
       <div className="container">
@@ -29,17 +29,23 @@ export default function Header() {
                       <Link to="/game/create">Create Game</Link>
                     </li>
                     <li>
-                      <Link to="/logout" className="user">Logout</Link>
+                      <Link to="/logout" className="user">
+                        Logout
+                      </Link>
                     </li>
                   </>
                 )}
                 {!isAuthenticated && (
                   <>
                     <li>
-                      <Link to="/login" className="user">Login</Link>
+                      <Link to="/login" className="user">
+                        Login
+                      </Link>
                     </li>
                     <li>
-                      <Link to="/register" className="user">Register</Link>
+                      <Link to="/register" className="user">
+                        Register
+                      </Link>
                     </li>
                   </>
                 )}
