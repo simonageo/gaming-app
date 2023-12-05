@@ -22,3 +22,9 @@ export const createGame = async (data) => {
   }
   return result;
 };
+
+export const getOne = async (gameId) => {
+  const response = await fetch(`${baseUrl}/${gameId}`);
+  const result = await response.json();
+  return result;
+};

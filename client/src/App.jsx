@@ -9,7 +9,8 @@ import Register from "./components/Register/Register";
 import { AuthProvider } from "./AuthContext";
 import Logout from "./components/Logout";
 import AuthGuard from "./AuthGuard";
-import AddGame from "./components/Games/AddGame/AddGame.jsx";
+import AddGame from "./components/Games/AddGame/AddGame";
+import GameDetails from "./components/Games/GameDetails/GameDetails";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route element={<AuthGuard/>}>
+          <Route path="/games/:gameId" element={<GameDetails />} />
+          <Route element={<AuthGuard />}>
             <Route path="/game/create" element={<AddGame />} />
             <Route path="/logout" element={<Logout />} />
           </Route>
