@@ -4,7 +4,7 @@ import styles from "./GameItemStyle.module.css";
 export default function GameItem({ imageUrl, title, category, _id }) {
   return (
     <div
-      className={`${styles.item} col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv`}
+      className={`${styles.item}`}
     >
       <div className="item">
         <div className={styles.thumb}>

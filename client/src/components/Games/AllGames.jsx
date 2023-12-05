@@ -28,33 +28,13 @@ export default function Games() {
       </div>
       <div className="section trending">
         <div className="container">
-          <ul className="trending-filter">
-            <li>
-              <a className="is_active" href="#!" data-filter="*">
-                Show All
-              </a>
-            </li>
-            <li>
-              <a href="#!" data-filter=".adv">
-                Adventure
-              </a>
-            </li>
-            <li>
-              <a href="#!" data-filter=".str">
-                Strategy
-              </a>
-            </li>
-            <li>
-              <a href="#!" data-filter=".rac">
-                Racing
-              </a>
-            </li>
-          </ul>
-          <div className='row trending-box'>
-            {games.map((game) => (
-              <GameItem key={game._id} {...game} />
-            ))}
+        <div className="row trending-box">
+        {games.map((game) => (
+          <div key={game._id} className="col-lg-4 mb-4">
+            <GameItem {...game} />
           </div>
+        ))}
+      </div>
         </div>
       </div>
     </>
