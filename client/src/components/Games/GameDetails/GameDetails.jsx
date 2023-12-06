@@ -5,11 +5,13 @@ import styles from "./GameDetails.module.css";
 import AuthContext from "../../../AuthContext";
 import { del } from "../../../services/gameService";
 import { CommentForm } from "./Comments/CommentForm";
+import { getAllComments } from "../../../services/commentService.js";
 
 export default function GameDetails() {
   const navigate = useNavigate();
   const { gameId } = useParams();
   const [game, setGame] = useState({});
+  const [comments, setComments] = useState([]);
   const [isCommentFormOpen, setCommentFormOpen] = useState(false);
 
   const openCommentForm = () => {
@@ -19,10 +21,30 @@ export default function GameDetails() {
   const closeCommentForm = () => {
     setCommentFormOpen(false);
   };
+
+  const commentSubmitHandler = async () => {
+    try {
+      const updatedComments = await getAllComments(gameId);
+      setComments(updatedComments);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+
   useEffect(() => {
-    getOne(gameId)
-      .then(setGame)
-      .catch((err) => console.log(err));
+    const fetchData = async () => {
+      try {
+        const gameDetails = await getOne(gameId);
+        setGame(gameDetails);
+
+        const commentsData = await getAllComments(gameId);
+        setComments(commentsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, [gameId]);
 
   const { userId, isAuthenticated } = useContext(AuthContext);
@@ -35,11 +57,6 @@ export default function GameDetails() {
       console.log(err);
     }
   };
-
-  const comments = [
-    { id: 1, text: "great" },
-    { id: 2, text: "i love it" },
-  ];
 
   return (
     <>
@@ -118,7 +135,7 @@ export default function GameDetails() {
                   <p>No comments.</p>
                 ) : (
                   comments.map((comment) => (
-                    <li key={comment.id}>{comment.text}</li>
+                    <li key={comment._id}>{comment.email}: {comment.text}</li>
                   ))
                 )}
               </ul>
@@ -130,9 +147,7 @@ export default function GameDetails() {
                   <CommentForm
                     isOpen={isCommentFormOpen}
                     onClose={closeCommentForm}
-                    /*onSubmit={submitComment}
-                    newComment={newComment}
-                    onCommentChange={setNewComment}*/
+                    onCommentSubmit={commentSubmitHandler}
                   />
                 </>
               )}

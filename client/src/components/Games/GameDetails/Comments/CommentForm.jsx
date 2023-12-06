@@ -1,6 +1,25 @@
+import { useContext, useState } from 'react';
 import styles from './CommentForm.module.css';
+import { create } from '../../../../services/commentService';
+import { useParams } from 'react-router-dom';
+import AuthContext from '../../../../AuthContext';
 
-export const CommentForm = ({ isOpen, onClose }) => {
+export const CommentForm = ({ isOpen, onClose, onCommentSubmit }) => {
+    const [commentText, setCommentText]=useState('');
+    const {gameId}=useParams();
+    const {email}=useContext(AuthContext)
+
+    const commentChange=(e)=>{
+        setCommentText(e.target.value);
+    }
+
+    const commentSubmit=async (e)=>{
+        e.preventDefault();
+        await create(gameId, commentText, email);
+        setCommentText('');
+        onClose();
+        onCommentSubmit();
+    }
   return (
     <>
       {isOpen && (
@@ -9,9 +28,11 @@ export const CommentForm = ({ isOpen, onClose }) => {
             <button className={styles.closeButton} onClick={onClose}>
               &times;
             </button>
-            <form >
+            <form onSubmit={commentSubmit}>
               <textarea
                 placeholder="Type your comment here..."
+                value={commentText}
+                onChange={commentChange}
               />
               <button type="submit" className={styles.button}>
                 Submit Comment

@@ -6,17 +6,21 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [isAuthenticated, setAuthenticated] = useState(
-    !!localStorage.accessToken
-  );
-  const [userId, setUserId] = useState("");
+  const [values, setValues] = useState({
+    email: "",
+    isAuthenticated: !!localStorage.accessToken,
+    userId: "",
+  });
 
   const login = async (values) => {
     try {
       const result = await authService.login(values.email, values.password);
       localStorage.setItem("accessToken", result.accessToken);
-      setAuthenticated(true);
-      setUserId(result._id);
+      setValues({
+        email: result.email,
+        isAuthenticated: true,
+        userId: result._id,
+      });
       navigate("/");
     } catch (err) {
       setUserId("");
@@ -28,8 +32,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const result = await authService.register(values.email, values.password);
       localStorage.setItem("accessToken", result.accessToken);
-      setAuthenticated(true);
-      setUserId(result._id);
+      setValues({
+        email: result.email,
+        isAuthenticated: true,
+        userId: result._id,
+      });
       navigate("/");
     } catch (err) {
       setUserId("");
@@ -40,9 +47,12 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       await authService.logout();
-      setAuthenticated(false);
       localStorage.removeItem("accessToken");
-      setUserId("");
+      setValues({
+        email: "",
+        isAuthenticated: false,
+        userId: "",
+      });
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -51,7 +61,14 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, login, register, logout, userId: userId }}
+      value={{
+        isAuthenticated: values.isAuthenticated,
+        login,
+        register,
+        logout,
+        userId: values.userId,
+        email: values.email,
+      }}
     >
       {children}
     </AuthContext.Provider>
