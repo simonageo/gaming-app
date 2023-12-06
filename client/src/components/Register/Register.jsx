@@ -2,16 +2,48 @@ import { Link } from "react-router-dom";
 import styles from "../Register/Register.module.css";
 import AuthContext from "../../AuthContext";
 import useForm from "../../hooks/useForm";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 export default function Register() {
   const { register } = useContext(AuthContext);
-  const { values, onChange, onSubmit } = useForm(register, {
-    username: "",
-    email: "",
-    password: "",
-    rePassword: "",
-  });
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.username) {
+      errors.username = "Username is required.";
+    }
+
+    if (!values.email) {
+      errors.email = "Email is required.";
+    }
+
+    if (!values.password) {
+      errors.password = "Password is required.";
+    }
+
+    if (!values.rePassword) {
+      errors.rePassword = "Repeat Password is required.";
+    }
+
+    if (values.password !== values.rePassword) {
+      errors.rePassword = "Passwords do not match.";
+    }
+
+    return errors;
+  };
+
+  const { values, onChange, onSubmit, errors } = useForm(
+    register,
+    {
+      username: "",
+      email: "",
+      password: "",
+      rePassword: "",
+    },
+    validate
+  );
+
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -27,7 +59,7 @@ export default function Register() {
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
                 <label htmlFor="username" className={styles.labelAbove}>
-                Username:
+                  Username:
                 </label>
                 <input
                   type="text"
@@ -40,6 +72,9 @@ export default function Register() {
                   onChange={onChange}
                   className={styles.inputField}
                 />
+                {errors.username && (
+                  <p className={styles.errorText}>{errors.username}</p>
+                )}
               </fieldset>
             </div>
             <div className="col-lg-12">
@@ -58,6 +93,9 @@ export default function Register() {
                   onChange={onChange}
                   className={styles.inputField}
                 />
+                {errors.email && (
+                  <p className={styles.errorText}>{errors.email}</p>
+                )}
               </fieldset>
             </div>
 
@@ -77,6 +115,9 @@ export default function Register() {
                   onChange={onChange}
                   className={styles.inputField}
                 />
+                {errors.password && (
+                  <p className={styles.errorText}>{errors.password}</p>
+                )}
               </fieldset>
             </div>
 
@@ -96,6 +137,9 @@ export default function Register() {
                   onChange={onChange}
                   className={styles.inputField}
                 />
+                {errors.rePassword && (
+                  <p className={styles.errorText}>{errors.rePassword}</p>
+                )}
               </fieldset>
             </div>
 

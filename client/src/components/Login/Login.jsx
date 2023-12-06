@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import styles from "../Login/Login.module.css";
 import useForm from "../../hooks/useForm";
 import { useContext } from "react";
@@ -7,10 +6,25 @@ import AuthContext from "../../AuthContext";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
-  const { values, onChange, onSubmit } = useForm(login, {
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.email) {
+      errors.email = "Email is required.";
+    }
+
+    if (!values.password) {
+      errors.password = "Password is required.";
+    }
+
+    return errors;
+  };
+
+  const { values, onChange, onSubmit, errors } = useForm(login, {
     email: "",
     password: "",
-  });
+  }, validate);
 
   return (
     <div className="container">
@@ -40,6 +54,9 @@ export default function Login() {
                   onChange={onChange}
                   className={styles.inputField}
                 />
+                {errors.email && (
+                  <p className={styles.errorText}>{errors.email}</p>
+                )}
               </fieldset>
             </div>
 
@@ -59,6 +76,9 @@ export default function Login() {
                   onChange={onChange}
                   className={styles.inputField}
                 />
+                {errors.password && (
+                  <p className={styles.errorText}>{errors.password}</p>
+                )}
               </fieldset>
             </div>
 

@@ -14,7 +14,7 @@ export const login = async (email, password) => {
   const result = await response.json();
 
   if (!response.ok) {
-    throw result;
+      throw result;
   }
 
   return result;
@@ -51,7 +51,4 @@ export const logout = async () => {
   if (response.status === 204) {
     return {};
   }
-  // if (!response.ok) {
-  //   throw result;
-  // }
 };

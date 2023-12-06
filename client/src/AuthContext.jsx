@@ -30,7 +30,11 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (values) => {
     try {
-      const result = await authService.register(values.username, values.email, values.password);
+      const result = await authService.register(
+        values.username,
+        values.email,
+        values.password
+      );
       localStorage.setItem("accessToken", result.accessToken);
       setValues({
         username: result.username,
@@ -68,7 +72,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         userId: values.userId,
         email: values.email,
-        username: values.username
+        username: values.username,
       }}
     >
       {children}

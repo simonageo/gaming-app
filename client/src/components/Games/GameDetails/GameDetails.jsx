@@ -135,7 +135,9 @@ export default function GameDetails() {
                   <p>No comments.</p>
                 ) : (
                   comments.map((comment) => (
-                    <li key={comment._id}>{comment.username}: {comment.text}</li>
+                    <li key={comment._id}>
+                      {comment.username}: {comment.text}
+                    </li>
                   ))
                 )}
               </ul>
