@@ -1,25 +1,25 @@
-import { useContext, useState } from 'react';
-import styles from './CommentForm.module.css';
-import { create } from '../../../../services/commentService';
-import { useParams } from 'react-router-dom';
-import AuthContext from '../../../../AuthContext';
+import { useContext, useState } from "react";
+import styles from "./CommentForm.module.css";
+import { create } from "../../../../services/commentService";
+import { useParams } from "react-router-dom";
+import AuthContext from "../../../../AuthContext";
 
 export const CommentForm = ({ isOpen, onClose, onCommentSubmit }) => {
-    const [commentText, setCommentText]=useState('');
-    const {gameId}=useParams();
-    const {email}=useContext(AuthContext)
+  const [commentText, setCommentText] = useState("");
+  const { gameId } = useParams();
+  const { username } = useContext(AuthContext);
 
-    const commentChange=(e)=>{
-        setCommentText(e.target.value);
-    }
+  const commentChange = (e) => {
+    setCommentText(e.target.value);
+  };
 
-    const commentSubmit=async (e)=>{
-        e.preventDefault();
-        await create(gameId, commentText, email);
-        setCommentText('');
-        onClose();
-        onCommentSubmit();
-    }
+  const commentSubmit = async (e) => {
+    e.preventDefault();
+    await create(gameId, commentText, username);
+    setCommentText("");
+    onClose();
+    onCommentSubmit();
+  };
   return (
     <>
       {isOpen && (

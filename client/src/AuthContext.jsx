@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
-    email: "",
+    username: "",
     isAuthenticated: !!localStorage.accessToken,
     userId: "",
   });
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       const result = await authService.login(values.email, values.password);
       localStorage.setItem("accessToken", result.accessToken);
       setValues({
-        email: result.email,
+        username: result.username,
         isAuthenticated: true,
         userId: result._id,
       });
@@ -30,10 +30,10 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (values) => {
     try {
-      const result = await authService.register(values.email, values.password);
+      const result = await authService.register(values.username, values.email, values.password);
       localStorage.setItem("accessToken", result.accessToken);
       setValues({
-        email: result.email,
+        username: result.username,
         isAuthenticated: true,
         userId: result._id,
       });
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       await authService.logout();
       localStorage.removeItem("accessToken");
       setValues({
-        email: "",
+        username: "",
         isAuthenticated: false,
         userId: "",
       });
@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         userId: values.userId,
         email: values.email,
+        username: values.username
       }}
     >
       {children}

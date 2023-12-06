@@ -7,6 +7,7 @@ import { useContext } from "react";
 export default function Register() {
   const { register } = useContext(AuthContext);
   const { values, onChange, onSubmit } = useForm(register, {
+    username: "",
     email: "",
     password: "",
     rePassword: "",
@@ -23,6 +24,24 @@ export default function Register() {
           </div>
 
           <form id="register-form" onSubmit={onSubmit}>
+            <div className="col-lg-12">
+              <fieldset className={styles.inputFieldContainer}>
+                <label htmlFor="username" className={styles.labelAbove}>
+                Username:
+                </label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Your Username..."
+                  autoComplete="on"
+                  required=""
+                  value={values.username}
+                  onChange={onChange}
+                  className={styles.inputField}
+                />
+              </fieldset>
+            </div>
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
                 <label htmlFor="email" className={styles.labelAbove}>

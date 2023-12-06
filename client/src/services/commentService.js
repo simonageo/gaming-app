@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3030/data/comments";
 
-export const create = async (gameId, text, email) => {
+export const create = async (gameId, text, username) => {
   const token = localStorage.getItem("accessToken");
   const response = await fetch(baseUrl, {
     method: "POST",
@@ -11,7 +11,7 @@ export const create = async (gameId, text, email) => {
     body: JSON.stringify({
       gameId,
       text,
-      email
+      username
     }),
   });
   const result = await response.json();
@@ -28,6 +28,5 @@ export const getAllComments = async (gameId) => {
 
   const response = await fetch(`${baseUrl}?${query}`);
   const result = response.json();
-  console.log(result);
   return result;
 };
