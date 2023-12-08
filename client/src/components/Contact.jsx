@@ -121,13 +121,13 @@ export default function ContactUs() {
                         </div>
                         <div className="col-lg-12">
                           <fieldset>
-                            <button
+                            <Link to='/'
                               type="submit"
                               id="form-submit"
                               className="orange-button"
                             >
                               Send Message Now
-                            </button>
+                            </Link>
                           </fieldset>
                         </div>
                       </div>
