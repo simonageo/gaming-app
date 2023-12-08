@@ -128,22 +128,27 @@ export default function GameDetails() {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h3>Comments</h3>
-              {/* Display all comments here */}
+              <h3 className={styles.commentHeader}>Comments</h3>
               <ul>
                 {comments.length === 0 ? (
-                  <p>No comments.</p>
+                  <p className={styles.comment}>No comments.</p>
                 ) : (
                   comments.map((comment) => (
-                    <li key={comment._id}>
-                      {comment.username}: {comment.text}
+                    <li key={comment._id} className={styles.comment}>
+                      <span style={{ fontWeight: "600" }}>
+                        {comment.username}:
+                      </span>{" "}
+                      {comment.text}
                     </li>
                   ))
                 )}
               </ul>
               {isAuthenticated && (
                 <>
-                  <button className={styles.button} onClick={openCommentForm}>
+                  <button
+                    className={styles.commentButton}
+                    onClick={openCommentForm}
+                  >
                     Add Comment
                   </button>
                   <CommentForm

@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = async (values) => {
-    const result = await authService.login(values.email, values.password);
+    const result = await authService.login( values.email, values.password );
     localStorage.setItem("accessToken", result.accessToken);
     setValues({
       username: result.username,

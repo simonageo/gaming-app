@@ -28,3 +28,41 @@
 .boldText {
   font-weight: bold;
 }
+
+.comment{
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 5px;
+  text-align: center;
+  background-color: #f7f7f7;
+  width: 400px;
+}
+
+.commentHeader{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.commentButton {
+  background-color: #ee626b;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px;
+  font-weight: 300;
+  font-size: 15px;
+  height: 40px;
+  line-height: 40px;
+  text-transform: capitalize;
+  color: #fff;
+  -webkit-transition: all 0.4s ease 0s;
+  -moz-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+  border: transparent;
+  letter-spacing: 0.25px;
+  margin: 0 auto;
+}

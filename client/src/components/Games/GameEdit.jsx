@@ -3,10 +3,12 @@ import styles from "../Games/AddGame/AddGame.module.css";
 import { useEffect, useState } from "react";
 import { getOne } from "../../services/gameService.js";
 import { edit } from "../../services/gameService";
+import { gameValidator } from "../../validations/gameValidation";
 
 export default function GameEdit() {
   const navigate = useNavigate();
   const { gameId } = useParams();
+  const [errors, setErrors] = useState({});
   const [game, setGame] = useState({
     title: "",
     category: "",
@@ -24,11 +26,18 @@ export default function GameEdit() {
   const editGameSubmit = async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
-    try {
-      await edit(gameId, data);
-      navigate("/games");
-    } catch (err) {
-      console.log(err);
+    const errorsRetrieved = gameValidator(data);
+    setErrors(errorsRetrieved);
+    if (Object.keys(errorsRetrieved).length > 0) {
+      setErrors(errorsRetrieved);
+    } else {
+      setErrors({});
+      try {
+        await edit(gameId, data);
+        navigate("/games");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
   const onChange = (e) => {
@@ -64,6 +73,9 @@ export default function GameEdit() {
                   value={game.title}
                   onChange={onChange}
                 />
+                {errors.title && (
+                  <p className={styles.errorText}>{errors.title}</p>
+                )}
               </fieldset>
             </div>
 
@@ -80,6 +92,9 @@ export default function GameEdit() {
                   value={game.category}
                   onChange={onChange}
                 />
+                {errors.category && (
+                  <p className={styles.errorText}>{errors.category}</p>
+                )}
               </fieldset>
             </div>
 
@@ -89,14 +104,16 @@ export default function GameEdit() {
                   Difficulty Level:
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="difficultyLevel"
                   id="difficultyLevel"
-                  min="0"
                   className={styles.inputField}
                   value={game.difficultyLevel}
                   onChange={onChange}
                 />
+                {errors.difficultyLevel && (
+                  <p className={styles.errorText}>{errors.difficultyLevel}</p>
+                )}
               </fieldset>
             </div>
 
@@ -113,6 +130,9 @@ export default function GameEdit() {
                   value={game.imageUrl}
                   onChange={onChange}
                 />
+                {errors.imageUrl && (
+                  <p className={styles.errorText}>{errors.imageUrl}</p>
+                )}
               </fieldset>
             </div>
 
@@ -128,6 +148,9 @@ export default function GameEdit() {
                   value={game.description}
                   onChange={onChange}
                 />
+                {errors.description && (
+                  <p className={styles.errorText}>{errors.description}</p>
+                )}
               </fieldset>
             </div>
 
