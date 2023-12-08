@@ -14,7 +14,7 @@ export default function useForm(submitHandler, initialValues, validate) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate(values);
-  
+
     if (Object.keys(validationErrors).length === 0) {
       setErrors({});
       try {

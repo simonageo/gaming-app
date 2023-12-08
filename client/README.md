@@ -16,3 +16,9 @@ Welcome to the Gaming App! This application allows registered and logged-in user
 Download GitHup repo
 
 Server init:
+- Open CMD in the server folder and enter "node server.js".
+
+Application init:
+- Open CMD in the client folder and enter "npm install".
+- Enter "npm run dev" to run the application.
+- To open in browser, use the link provided in the terminal.
