@@ -12,8 +12,8 @@ export const gameValidator = (values) => {
 
   if (!values.difficultyLevel) {
     errors.difficultyLevel = "Difficulty Level is required.";
-  } else if (isNaN(Number(values.difficultyLevel))){
-    errors.difficultyLevel = "Please, enter a number."
+  } else if (isNaN(Number(values.difficultyLevel))) {
+    errors.difficultyLevel = "Please, enter a number.";
   } else if (Number(values.difficultyLevel) < 1) {
     errors.difficultyLevel = "Difficulty Level must be bigger or equal to 1.";
   }

@@ -38,7 +38,7 @@ export default function Search() {
               ))}
             </div>
           ) : (
-            <h3 className="col-lg-12">No matches found.</h3>
+            <h3 className="col-lg-12 text-center my-4">No matches found.</h3>
           )}
         </div>
       </div>

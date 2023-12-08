@@ -15,7 +15,7 @@ export default function AddGame() {
     if (Object.keys(errorsRetrieved).length > 0) {
       setErrors(errorsRetrieved);
     } else {
-      setErrors({})
+      setErrors({});
       try {
         await createGame(data);
         navigate("/games");
@@ -36,7 +36,7 @@ export default function AddGame() {
             </span>
           </div>
 
-          <form id="create-game-form" onSubmit={createGameHandler} >
+          <form id="create-game-form" onSubmit={createGameHandler}>
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
                 <label htmlFor="title" className={styles.labelAbove}>
@@ -85,7 +85,6 @@ export default function AddGame() {
                   name="difficultyLevel"
                   id="difficultyLevel"
                   placeholder="Difficulty Level..."
-                  min="1"
                   className={styles.inputField}
                 />
                 {errors.difficultyLevel && (
