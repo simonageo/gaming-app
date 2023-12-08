@@ -9,3 +9,10 @@ Welcome to the Gaming App! This application allows registered and logged-in user
 - **Edit Game:** Modify existing game details to keep catalog up-to-date.
 - **Remove Game:** Delete unwanted games.
 - **Comments:** Users can add comments to share their opinions and experiences about a specific game.
+
+
+## Installation
+
+Download GitHup repo
+
+Server init:

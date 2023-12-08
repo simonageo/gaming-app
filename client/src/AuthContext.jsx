@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = async (values) => {
-    try {
       const result = await authService.login(values.email, values.password);
       localStorage.setItem("accessToken", result.accessToken);
       setValues({
@@ -22,12 +21,8 @@ export const AuthProvider = ({ children }) => {
         userId: result._id,
       });
       navigate("/");
-    } catch (err) {
-      setUserId("");
-      navigate("/");
-    }
   };
-
+  
   const register = async (values) => {
     try {
       const result = await authService.register(
@@ -43,7 +38,10 @@ export const AuthProvider = ({ children }) => {
       });
       navigate("/");
     } catch (err) {
-      setUserId("");
+      setValues((prevValues) => ({
+        ...prevValues,
+        userId: "",
+      }));
       navigate("/");
     }
   };

@@ -14,15 +14,17 @@ export default function useForm(submitHandler, initialValues, validate) {
   const onSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate(values);
-
+  
     if (Object.keys(validationErrors).length === 0) {
       setErrors({});
       try {
         await submitHandler(values);
       } catch (error) {
-        // Handle error from login or other operations
-        console.error("Submit handler error:", error);
-        // You can set an error state here if needed
+        if (error.message === "Invalid email or password") {
+          setErrors({ loginError: "Invalid email or password" });
+        } else {
+          console.error("Submit handler error:", error);
+        }
       }
     } else {
       setErrors(validationErrors);

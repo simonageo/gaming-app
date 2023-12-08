@@ -1,30 +1,22 @@
 import { Link } from "react-router-dom";
 import styles from "../Login/Login.module.css";
 import useForm from "../../hooks/useForm";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../AuthContext";
+import { validateLogin } from "../../validations/userValidation";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
+  const [serverError, setServerError] = useState("");
 
-  const validate = (values) => {
-    const errors = {};
-
-    if (!values.email) {
-      errors.email = "Email is required.";
-    }
-
-    if (!values.password) {
-      errors.password = "Password is required.";
-    }
-
-    return errors;
-  };
-
-  const { values, onChange, onSubmit, errors } = useForm(login, {
-    email: "",
-    password: "",
-  }, validate);
+  const { values, onChange, onSubmit, errors } = useForm(
+    login,
+    {
+      email: "",
+      password: "",
+    },
+    validateLogin
+  );
 
   return (
     <div className="container">
@@ -78,6 +70,9 @@ export default function Login() {
                 />
                 {errors.password && (
                   <p className={styles.errorText}>{errors.password}</p>
+                )}
+                {errors.loginError && (
+                  <p className={styles.errorText}>{errors.loginError}</p>
                 )}
               </fieldset>
             </div>

@@ -2,36 +2,11 @@ import { Link } from "react-router-dom";
 import styles from "../Register/Register.module.css";
 import AuthContext from "../../AuthContext";
 import useForm from "../../hooks/useForm";
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { validateRegister } from "../../validations/userValidation";
 
 export default function Register() {
   const { register } = useContext(AuthContext);
-
-  const validate = (values) => {
-    const errors = {};
-
-    if (!values.username) {
-      errors.username = "Username is required.";
-    }
-
-    if (!values.email) {
-      errors.email = "Email is required.";
-    }
-
-    if (!values.password) {
-      errors.password = "Password is required.";
-    }
-
-    if (!values.rePassword) {
-      errors.rePassword = "Repeat Password is required.";
-    }
-
-    if (values.password !== values.rePassword) {
-      errors.rePassword = "Passwords do not match.";
-    }
-
-    return errors;
-  };
 
   const { values, onChange, onSubmit, errors } = useForm(
     register,
@@ -41,7 +16,7 @@ export default function Register() {
       password: "",
       rePassword: "",
     },
-    validate
+    validateRegister
   );
 
   return (

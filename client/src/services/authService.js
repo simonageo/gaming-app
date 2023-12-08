@@ -1,23 +1,33 @@
 const baseUrl = "http://localhost:3030/users";
 
 export const login = async (email, password) => {
-  const response = await fetch(`${baseUrl}/login`, {
-    method: "POST",
-    headers: {
-      "Content-type": "application-json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
-  const result = await response.json();
+  try {
+    const response = await fetch(`${baseUrl}/login`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
 
-  if (!response.ok) {
-      throw result;
+    if (!response.ok) {
+      if (response.status === 403) {
+        throw new Error("Invalid email or password"); // Provide a specific error message for 403 status
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
   }
-
-  return result;
 };
 
 export const register = async (email, password) => {
