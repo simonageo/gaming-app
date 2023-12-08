@@ -1,19 +1,29 @@
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../AddGame/AddGame.module.css";
-import {createGame} from "../../../services/gameService";
+import { createGame } from "../../../services/gameService";
+import { gameValidator } from "../../../validations/gameValidation.js";
+import { useState } from "react";
 
 export default function AddGame() {
-  const navigate=useNavigate();
-  const createGameHandler=async(e)=>{
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+  const createGameHandler = async (e) => {
     e.preventDefault();
-    const data=Object.fromEntries(new FormData(e.currentTarget));
-    try{
-      await createGame(data);
-      navigate('/games')
-    } catch(err){
-      console.log(err)
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const errorsRetrieved = gameValidator(data);
+    setErrors(errorsRetrieved);
+    if (Object.keys(errorsRetrieved).length > 0) {
+      setErrors(errorsRetrieved);
+    } else {
+      setErrors({})
+      try {
+        await createGame(data);
+        navigate("/games");
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }
+  };
 
   return (
     <div className="container">
@@ -26,7 +36,7 @@ export default function AddGame() {
             </span>
           </div>
 
-          <form id="create-game-form" onSubmit={createGameHandler}>
+          <form id="create-game-form" onSubmit={createGameHandler} >
             <div className="col-lg-12">
               <fieldset className={styles.inputFieldContainer}>
                 <label htmlFor="title" className={styles.labelAbove}>
@@ -41,6 +51,9 @@ export default function AddGame() {
                   required=""
                   className={styles.inputField}
                 />
+                {errors.title && (
+                  <p className={styles.errorText}>{errors.title}</p>
+                )}
               </fieldset>
             </div>
 
@@ -56,6 +69,9 @@ export default function AddGame() {
                   placeholder="Category..."
                   className={styles.inputField}
                 />
+                {errors.category && (
+                  <p className={styles.errorText}>{errors.category}</p>
+                )}
               </fieldset>
             </div>
 
@@ -65,13 +81,16 @@ export default function AddGame() {
                   Difficulty Level:
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="difficultyLevel"
                   id="difficultyLevel"
                   placeholder="Difficulty Level..."
-                  min="0"
+                  min="1"
                   className={styles.inputField}
                 />
+                {errors.difficultyLevel && (
+                  <p className={styles.errorText}>{errors.difficultyLevel}</p>
+                )}
               </fieldset>
             </div>
 
@@ -87,6 +106,9 @@ export default function AddGame() {
                   placeholder="Image URL..."
                   className={styles.inputField}
                 />
+                {errors.imageUrl && (
+                  <p className={styles.errorText}>{errors.imageUrl}</p>
+                )}
               </fieldset>
             </div>
 
@@ -101,6 +123,9 @@ export default function AddGame() {
                   placeholder="Description..."
                   className={styles.inputField}
                 />
+                {errors.description && (
+                  <p className={styles.errorText}>{errors.description}</p>
+                )}
               </fieldset>
             </div>
 
