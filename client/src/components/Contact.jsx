@@ -25,10 +25,7 @@ export default function ContactUs() {
                   <h2>Say Hello!</h2>
                 </div>
                 <p>
-                  LUGX Gaming Template is based on the latest Bootstrap 5 CSS
-                  framework. This template is provided by TemplateMo and it is
-                  suitable for your gaming shop ecommerce websites. Feel free to
-                  use this for any purpose. Thank you.
+                  Tell us what you think about this application or if you have any problems with it.
                 </p>
                 <ul>
                   <li>

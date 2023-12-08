@@ -1,4 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  const navigate=useNavigate();
+  const [searchKeyword, setSearchKeyword]=useState('');
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?title=${searchKeyword}`)
+  }
+
   return (
     <div className="main-banner">
       <div className="container">
@@ -12,12 +23,14 @@ export default function Home() {
                 game catalog web application.
               </p>
               <div className="search-input">
-                <form id="search" action="#">
+                <form id="search" onSubmit={onSearch}>
                   <input
                     type="text"
                     placeholder="Type Something"
                     id="searchText"
+                    value={searchKeyword}
                     name="searchKeyword"
+                    onChange={(e) => setSearchKeyword(e.target.value)}
                   />
                   <button role="button">Search Now</button>
                 </form>
@@ -27,8 +40,6 @@ export default function Home() {
           <div className="col-lg-4 offset-lg-2">
             <div className="right-image">
               <img src="images/banner-image.jpg" alt="" />
-              {/* <span className="price">$22</span>
-              <span className="offer">-40%</span> */}
             </div>
           </div>
         </div>

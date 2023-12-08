@@ -12,6 +12,7 @@ import AuthGuard from "./AuthGuard";
 import AddGame from "./components/Games/AddGame/AddGame";
 import GameDetails from "./components/Games/GameDetails/GameDetails";
 import GameEdit from "./components/Games/GameEdit";
+import Search from "./components/Search/Search";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/games/:gameId" element={<GameDetails />} />
+          <Route path="/search" element={<Search />} />
           <Route element={<AuthGuard />}>
             <Route path="/game/create" element={<AddGame />} />
             <Route path="/logout" element={<Logout />} />

@@ -9,7 +9,7 @@ export default function GameItem({ imageUrl, title, category, _id }) {
       <div className="item">
         <div className={styles.thumb}>
           <Link to={`/games/${_id}`}>
-            <img src={imageUrl} alt="" />
+            <img src={imageUrl} className={styles.customImage} alt="" />
           </Link>
         </div>
         <div className={styles["down-content"]}>
